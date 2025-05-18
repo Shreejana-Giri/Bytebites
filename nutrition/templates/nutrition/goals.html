@@ -1,0 +1,74 @@
+{% extends "nutrition/base.html" %}
+
+{% block title %}Nutrition Goals{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="mb-0">Set Your Nutrition Goals</h3>
+            </div>
+            <div class="card-body">
+                <p class="mb-4">What are you trying to achieve with your nutrition plan?</p>
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="mb-4">
+                        {% for radio in form.goal %}
+                        <div class="card mb-3 goal-option">
+                            <div class="card-body">
+                                <div class="form-check">
+                                    {{ radio.tag }}
+                                    <label class="form-check-label" for="{{ radio.id_for_label }}">
+                                        <strong>{{ radio.choice_label }}</strong>
+                                    </label>
+                                </div>
+                                <div class="ms-4 mt-2 text-muted small">
+                                    {% if radio.choice_value == 'maintain' %}
+                                        Keep your current weight while optimizing nutrition for health.
+                                    {% elif radio.choice_value == 'lose' %}
+                                        Reduce body weight gradually through calorie control and balanced nutrition.
+                                    {% elif radio.choice_value == 'gain' %}
+                                        Increase weight and muscle mass through strategic surplus calories and protein.
+                                    {% elif radio.choice_value == 'cut' %}
+                                        Reduce body fat while preserving muscle mass for a more defined physique.
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Save and Continue</button>
+                        <a href="{% url 'profile' %}" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .goal-option:hover {
+        border-color: var(--primary-color);
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Make the whole card clickable for the radio options
+        const goalOptions = document.querySelectorAll('.goal-option');
+        
+        goalOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                radio.checked = true;
+            });
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends "nutrition/base.html" %}
+
+{% block title %}Basic Information{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="mb-0">Basic Information</h3>
+            </div>
+            <div class="card-body">
+                <p class="mb-4">Please provide your basic information so we can calculate your BMI and BMR.</p>
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="id_height" class="form-label">Height (cm)</label>
+                            <input type="number" step="0.01" name="height" id="id_height" value="{{ form.height.value|default:'' }}" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="id_weight" class="form-label">Weight (kg)</label>
+                            <input type="number" step="0.01" name="weight" id="id_weight" value="{{ form.weight.value|default:'' }}" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="id_age" class="form-label">Age</label>
+                            <input type="number" name="age" id="id_age" value="{{ form.age.value|default:'' }}" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Gender</label>
+                            <div>
+                                {% for radio in form.gender %}
+                                <div class="form-check form-check-inline">
+                                    {{ radio.tag }}
+                                    <label class="form-check-label" for="{{ radio.id_for_label }}">
+                                        {{ radio.choice_label }}
+                                    </label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Diet Preference</label>
+                        <div>
+                            {% for radio in form.diet_preference %}
+                            <div class="form-check form-check-inline">
+                                {{ radio.tag }}
+                                <label class="form-check-label" for="{{ radio.id_for_label }}">
+                                    {{ radio.choice_label }}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="id_allergies" class="form-label">Allergies/Dietary Restrictions (if any)</label>
+                        <textarea name="allergies" id="id_allergies" class="form-control" rows="3" placeholder="e.g., Peanuts, Shellfish, Lactose, Gluten, etc.">{{ form.allergies.value|default:'' }}</textarea>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Save and Continue</button>
+                        <a href="{% url 'profile' %}" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

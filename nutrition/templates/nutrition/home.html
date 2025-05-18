@@ -1,0 +1,217 @@
+
+
+
+
+{% extends "nutrition/base.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+
+
+
+<div class="hero-section">
+      <div class="wrapper">
+        <div class="text-section">
+          <h1 class="header-one">FUEL YOUR FITNESS JOURNEY</h1>
+          <p>Eat smart , Move strong</p>
+          {% if not user.is_authenticated %}
+            <div class="mt-4">
+                <a href="{% url 'register' %}" class="btn btn-primary btn-lg me-2">Get Started</a>
+                <a href="{% url 'login' %}" class="btn btn-outline-secondary btn-lg">Login</a>
+            </div>
+            {% else %}
+            <div class="mt-4">
+                <a href="{% url 'profile' %}" class="btn btn-primary btn-lg">Go to Profile</a>
+            </div>
+            {% endif %}
+        </div>
+        <div class="hero-img">
+          <img src="{% static 'image/hero-img.png' %}" alt="Not Available" class="hero-img">
+        </div>
+      </div>
+    </div>
+
+    <h1 class="nunito-sans header-our-features">Our Features</h1>
+
+    <div class="our-features-container">
+      <div class="wrapper">
+       
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-calculator fa-3x mb-3" style="color: var(--primary-color);"></i>
+                <h3 class="card-title">BMI & BMR Calculator</h3>
+                <p class="card-text">Calculate your Body Mass Index and Basal Metabolic Rate to understand your body's needs.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-utensils fa-3x mb-3" style="color: var(--primary-color);"></i>
+                <h3 class="card-title">Personalized Diet Plans</h3>
+                <p class="card-text">Get AI-generated diet plans based on your body metrics, lifestyle, and goals.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-chart-line fa-3x mb-3" style="color: var(--primary-color);"></i>
+                <h3 class="card-title">Progress Tracking</h3>
+                <p class="card-text">Track your weight, calorie intake, and visualize your progress over time.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-camera fa-3x mb-3" style="color: var(--primary-color);"></i>
+                <h3 class="card-title">Food Calorie Estimation</h3>
+                <p class="card-text">Upload a photo of your food, describe the ingredients, and our AI will estimate its calorie content.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-brain fa-3x mb-3" style="color: var(--primary-color);"></i>
+                <h3 class="card-title">AI-Powered Insights</h3>
+                <p class="card-text">Leveraging Google's Gemini AI to provide intelligent nutrition recommendations tailored to your needs.</p>
+            </div>
+        </div>
+    </div>
+</div>
+      </div>
+    </div>
+
+
+    <h1 class="nunito-sans header-our-features">See what others are saying</h1>
+
+
+
+    <div class="girl-thinking">
+      <div class="wrapper">
+        <div class="testimonial-container">
+          <div class="testimonials-upper">
+            <div class="testimonial">
+              <img src="{% static 'image/avatar-01.jpg' %}" alt="User" class="avatar" />
+              <div class="content">
+                <h3>Khushi Regmi</h3>
+                <p class="date">9 days ago</p>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="message">BitesByts is exactly what I needed! The chatbot helped me customize a weight loss
+                  plan...</p>
+              </div>
+            </div>
+
+            <div class="testimonial">
+              <img src="{% static 'image/avatar-01.jpg' %}" alt="User" class="avatar" />
+              <div class="content">
+                <h3>Khushi Regmi</h3>
+                <p class="date">9 days ago</p>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="message">BitesByts is exactly what I needed! The chatbot helped me customize a weight loss
+                  plan...</p>
+              </div>
+            </div>
+          </div>
+          <img src="{% static 'image/girl-thinking.avif' %}" alt="Not-Available">
+          <div class="testimonials-upper">
+
+            <div class="testimonial">
+              <img src="{% static 'image/avatar-01.jpg' %}" alt="User" class="avatar" />
+              <div class="content">
+                <h3>Khushi Regmi</h3>
+                <p class="date">9 days ago</p>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="message">BitesByts is exactly what I needed! The chatbot helped me customize a weight loss
+                  plan...</p>
+              </div>
+            </div>
+            <div class="testimonial">
+              <img src="{% static 'image/avatar-01.jpg' %}" alt="User" class="avatar" />
+              <div class="content">
+                <h3>Khushi Regmi</h3>
+                <p class="date">9 days ago</p>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="message">BitesByts is exactly what I needed! The chatbot helped me customize a weight loss
+                  plan...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="journey">
+      <div class="wrapper">
+        <div class="text-container-journey">
+          <h3 class="journey-header">Start Your Health Journey Today</h3>
+          <p class="journey-para">Join thousands of Nepalis who are achieving their health goals with ByteBites</p>
+          <div class="button-holder">
+            <button><a href="" class="links">Create Free Account</a></button>
+            <button><a href="" class="links" style="background-color: transparent;">Learn More</a></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} <div class="row justify-content-center">
+    <div class="col-md-10">
+        <!-- <div class="background">
+            <img src="/static/image/background.jpg">
+            
+        </div> -->
+        <div class="jumbotron text-center py-5 mb-4 bg-light rounded-3">
+            <h1 class="display-4">Welcome to ByteBites</h1>
+            <p class="lead">Healthy life, one BITE at a time.</p>
+            <hr class="my-4">
+            <p>Get personalized diet plans, track your progress, and estimate food calories with AI</p>
+            {% if not user.is_authenticated %}
+            <div class="mt-4">
+                <a href="{% url 'register' %}" class="btn btn-primary btn-lg me-2">Get Started</a>
+                <a href="{% url 'login' %}" class="btn btn-outline-secondary btn-lg">Login</a>
+            </div>
+            {% else %}
+            <div class="mt-4">
+                <a href="{% url 'profile' %}" class="btn btn-primary btn-lg">Go to Profile</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div> {% endcomment %}
+
+{% endblock %}

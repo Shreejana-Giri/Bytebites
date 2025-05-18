@@ -1,0 +1,39 @@
+{% extends 'nutrition/base.html' %}
+{% load static %}
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+ <div class="about-section">
+            <div class="wrapper">
+                <div class="about-image-section">
+                    <div class="users-info">
+                        <p class="roboto-flex">Users</p>
+                        <p class="roboto-flex">300+</p>
+                    </div>
+
+                    <div class="users-info1">
+                        <div class="profile-holder">
+                            <img src="{% static 'image/avatar-02.jpg' %}" alt="">
+                            <div class="stack-img">
+                                <img src="{% static 'image/avatar-03.jpg' %}" alt="">
+                                <img src="{% static 'image/avatar-01.jpg' %}" alt="">
+                            </div>
+                        </div>
+                        <p class="roboto-flex">500+ reviews</p>
+                    </div>
+                    <img src="{% static 'image/about-us-img.png' %}" alt="Not Available">
+                </div>
+                <div class="about-text-section">
+                    <h1 class="header-one roboto-flex">About Us</h1>
+                    <p class="about-para roboto-flex">We’re a health-focused platform designed to personalize your
+                        wellness journey. By understanding your goals, body type, and dietary preferences, we provide
+                        tailored meal plans, nutritious recipes, and smart suggestions to help you eat better and live
+                        healthier.
+                        Our chatbot assistant is here 24/7 to guide you, recommend meals, and answer all your nutrition
+                        questions. Whether you’re aiming to lose weight, gain muscle, or maintain a balanced lifestyle,
+                        BitesBytes is your digital partner in health — one bite and one byte at a time.
+                        Join us and turn healthy eating into a lifestyle you'll love.</p>
+                </div>
+            </div>
+        </div>
+{% endblock %}

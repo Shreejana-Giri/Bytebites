@@ -1,0 +1,500 @@
+    {% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ByteBites - {% block title %}Nutrition App{% endblock %}</title>
+    
+    
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" type="text/css" href="/static/css/footer.css"> </head> 
+ 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+   
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    
+    {% block extra_head %}{% endblock %}
+    
+    {% comment %} <style>
+        :root {
+            --primary-color: #198754;
+            --secondary-color: #8BC34A;
+            --dark-color: #388E3C;
+            --light-color: #C8E6C9;
+            --accent-color: #FF9800;
+        }
+        
+         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        
+        .navbar {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255,255,255,0.9) !important;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+        }
+       
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--dark-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--dark-color);
+            border-color: var(--dark-color);
+        }
+        
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border: none;
+        }
+        
+        .card-header {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            font-weight: bold;
+            border-top-left-radius: 10px !important;
+            border-top-right-radius: 10px !important;
+        }
+    
+
+ul {
+    list-style: none;
+}
+a {
+    text-decoration: unset;
+}
+a:hover {
+    text-decoration: underline;
+}
+ul > li > a {
+    color:#fff;
+}
+ul > li {
+    line-height: 1.5em;
+}
+.footer {
+    display: block;
+    width: 100%;
+    position: relative;
+    padding-top: 100px;
+    padding-right: 25px;
+    padding-bottom: 50px;
+    padding-left: 25px;
+    background: var(--primary-color);
+    margin-top: 100px;
+}
+
+.footer .inner {
+    display: flex;
+    column-gap: 20px;
+    row-gap: 20px;
+    justify-content: space-between;
+    max-width: 1180px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    color: #fff;
+}
+.main-logo {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.main-logo .logo {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+.main-logo .logo > img {
+    display: block;
+    width: 200px;
+    min-width: 35px;
+}
+.logo-info {
+    text-align: left;
+    line-height: 20px;
+}
+.text {
+    font-size: 17px;
+    line-height: 17px;
+    color: #fff;
+    letter-spacing: .18em;
+    font-weight: 600;
+}
+.copyright {
+    color: #fff;
+    font-size: 12px;
+    line-height: 12px;
+}
+.is-logo > a {
+    text-decoration: unset;
+}
+
+
+.footer .column {
+    width: 100%;
+    font-size: 14px;
+    text-align: left;
+}
+.footer .column .column-title {
+    margin-bottom: 0.5em;
+    font-weight: 700;
+    font-size: 16px;
+}
+.footer .column .column-title:not(:first-child) {
+    margin-top: 1.5em;
+}
+
+.illustration {
+    position: absolute;
+    top: -28px;
+    left: 8%;
+}
+a.button {
+    display: inline-flex;
+    position: relative;
+    height: 60px;
+    margin-right: 20px;
+    flex-direction: row;
+    align-items: center;
+    overflow: hidden;
+    background: #fff;
+    color: #705df2;
+    border-radius: 36px;
+    box-shadow: 0px 24px 74px rgb(60 0 189 / 20%);
+    font-size: 16px;
+    font-weight: 700;
+    padding: 0 30px;
+    text-decoration: unset;
+}
+.section-title {
+    font-size: 44px;
+    font-weight: 700;
+    color: #fff;
+}
+h3.section-sub-title {
+    font-size: 22px;
+    font-weight: 400;
+    color: #fff;
+}
+.section-sub-title span{
+    opacity: 0.6;
+}
+h3.section-sub-title strong {
+    font-weight: 600;
+}
+
+
+@media only screen and (max-width: 990px) and (min-width: 200px) {
+    body {
+        height: 200vh;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+    .footer .inner {
+        display: grid;
+        grid-template-columns: repeat( auto-fit, minmax(200px, 1fr) );
+    }
+    .start-learning {
+        position: unset;
+    }
+    .footer-start {
+        width: 100%;
+        display: block;
+        padding: 30px 20px;
+        margin: 30px auto;
+    }
+    .section-title {
+        font-size: 30px;
+    }
+    h3.section-sub-title {
+        font-size: 18px;
+    }
+    .footer {
+        padding-top:0;
+    }
+    a.button {
+        height: 50px;
+        margin-top: 10px;
+    }
+    .column.is-logo {
+        order: 4;
+    }
+} 
+        
+        
+        .alert {
+            border-radius: 8px;
+        }
+    </style> {% endcomment %}
+</head>
+<body>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <header class="header-main">
+    <div class="wrapper">
+        <div class="logo-container">
+            <img src="{% static 'image/header_logo1.png' %}" alt="Not Available" class="logo-img">
+            <H6 class="nova-square-regular">Bitesbytes</H3>
+        </div>
+
+    <!-- Navbar -->
+        <nav class="navbar">
+                  
+            <ul class="links-container">
+                    <li class="links">
+                        <a class="anchor" href="{% url 'home' %}">Home</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="links">
+                        <a class="anchor" href="{% url 'aboutus' %}">About Us</a>
+                    </li>
+                    <li class="links">
+                        <a class="anchor" href="{% url 'how_it_works' %}">How it works</a>
+                    </li>
+
+                    <li class="links">
+                        <a class="anchor" href="{% url 'profile' %}">Profile</a>
+                    </li>
+                    <li class="links">
+                        <a class="anchor" href="{% url 'diet_plan' %}">Diet Plan</a>
+                    </li>
+                    {% comment %} <li class="links">
+                        <a class="anchor" href="#">Track Progress</a>
+                    </li>
+                    <li class="links">
+                        <a class="anchor" href="#">Calorie Estimation</a>
+                    </li> {% endcomment %}
+                </ul>
+   {% if user.is_authenticated %}
+    <div class="profile-section">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" stroke-dasharray="28" stroke-dashoffset="28" stroke-linecap="round"
+            stroke-linejoin="round" stroke-width="2">
+            <path d="M4 21v-1c0 -3.31 2.69 -6 6 -6h4c3.31 0 6 2.69 6 6v1">
+              <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="28;0" />
+            </path>
+            <path d="M12 11c-2.21 0 -4 -1.79 -4 -4c0 -2.21 1.79 -4 4 -4c2.21 0 4 1.79 4 4c0 2.21 -1.79 4 -4 4Z">
+              <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.4s" values="28;0" />
+            </path>
+          </g>
+        </svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <path stroke-dasharray="72" stroke-dashoffset="72"
+              d="M3 19.5v-15.5c0 -0.55 0.45 -1 1 -1h16c0.55 0 1 0.45 1 1v12c0 0.55 -0.45 1 -1 1h-14.5Z">
+              <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="72;0" />
+            </path>
+            <path stroke-dasharray="10" stroke-dashoffset="10" d="M8 7h8">
+              <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.7s" dur="0.2s" values="10;0" />
+            </path>
+            <path stroke-dasharray="10" stroke-dashoffset="10" d="M8 10h8">
+              <animate fill="freeze" attributeName="stroke-dashoffset" begin="1s" dur="0.2s" values="10;0" />
+            </path>
+            <path stroke-dasharray="6" stroke-dashoffset="6" d="M8 13h4">
+              <animate fill="freeze" attributeName="stroke-dashoffset" begin="1.3s" dur="0.2s" values="6;0" />
+            </path>
+          </g>
+        </svg>
+      </div>
+      {% endif %}
+                    {% endif %}
+                <ul class="links-container">
+                    {% if user.is_authenticated %}
+                    <li class="links">
+                        <a class="anchor" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="links">
+                        <a class="anchor" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="links">
+                        <a class="anchor" href="{% url 'register' %}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+           
+        </nav>
+
+  
+</div>
+</header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Main Content -->
+     <main>
+    <div class="container">
+        <!-- Messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+        
+        <!-- Page Content -->
+        {% block content %}
+        
+        {% endblock %}
+</main>
+    <!-- Footer -->
+
+        <footer>
+    <div class="wrapper">
+      <div class="footer-upper">
+        <div class="footer-text-section">
+          <h3 class="footer-header nova-square-regular">Bitesbytes</h3>
+          <p class="footer-para inter">Personalized nutrition planning tailored for Nepalis, helping you achieve your
+            health
+            goals with local food options</p>
+        </div>
+
+        <div class="footer-features">
+          <h3 class="footer-header poppins-bold">Features</h3>
+          <ul class="features-holder">
+            <li class="features-text inter"><a href="" class="anchor-text inter">Diet Plans</a></li>
+            <li class="features-text"><a href="" class="anchor-text inter">AI Chatbot</a></li>
+            <li class="features-text"><a href="" class="anchor-text inter">Progress Tracking</a></li>
+            <li class="features-text"><a href="" class="anchor-text inter">Recipes</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-features">
+          <h3 class="footer-header poppins-bold">Company</h3>
+          <ul class="features-holder">
+            <li class="features-text "><a href="" class="anchor-text inter">About Us</a></li>
+            <li class="features-text"><a href="" class="anchor-text inter">Blog</a></li>
+            <li class="features-text"><a href="" class="anchor-text inter">Careers</a></li>
+            <li class="features-text"><a href="" class="anchor-text inter">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-features">
+          <h3 class="footer-header poppins-bold">Support</h3>
+          <ul class="features-holder">
+            <li class="features-text"><a href="" class="anchor-text inter">Help Center</a></li>
+            <li class="features-text"><a href="" class="anchor-text inter">Privacy Policy</a></li>
+            <li class="features-text"><a href="" class="anchor-text inter">Terms of Service</a></li>
+            <li class="features-text"><a href="" class="anchor-text inter">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-mid">
+        <hr class="hr">
+        <ul class="link-holder">
+          <li class="anchor-holder"><a href="" class="anchor-links nunito-sans">Privacy Policy</a></li>
+          <li class="anchor-holder"><a href="" class="anchor-links nunito-sans">Terms & Conditions</a></li>
+          <li class="anchor-holder"><a href="" class="anchor-links nunito-sans">Terms of use</a></li>
+          <li class="anchor-holder"><a href="" class="anchor-links nunito-sans">Terms of Services</a></li>
+        </ul>
+        <hr class="hr">
+      </div>
+
+      <div class="footer-lower">
+        <div class="socialmedia">
+          <ul class="icon-holder"><a href="" class="icon-click"></a><a href="" class="icon-click"></a><a href=""
+              class="icon-click"></a><a href="" class="icon-click"></a></ul>
+        </div>
+
+        <div class="copyright">
+          <p>Copyright © 2023 Bitesbytes. All rights reserved.</p>
+        </div>
+
+
+
+
+      </div>
+    </div>
+
+  </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="/static/nutrition/js/scripts.js"></script>
+    
+    {% block scripts %}{% endblock %}
+</body>
+</html>

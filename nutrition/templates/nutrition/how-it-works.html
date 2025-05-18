@@ -1,0 +1,55 @@
+{% extends 'nutrition/base.html' %}
+{% load static %}
+
+{% block title %}How It Works{% endblock %}
+
+{% block content %}
+ <div class="how-it-works-container">
+            <div class="wrapper">
+                <div class="how-it-works-text-container">
+                    <div class="main-text-section">
+                        <h1 class="roboto-flex">How it works?</h1>
+                        <pre class="nunito-sans">
+Our platform is designed to be user-friendly and 
+intuitive. Simply sign up and explore our features. You 
+can easily customize your experience based on your preferences.
+
+Each tool is carefully crafted to ensure smooth
+functionality. We aim to make your tasks easier with 
+minimal effort.
+
+Enjoy seamless navigation, allowing you to focus on 
+what matters most. We're here to help every step of the 
+way!
+                        </pre>
+                    </div>
+                    <div class="plans-container">
+                        <div class="plan-section">
+                            <div class="section-plans">
+                                <div class="plans-text-container">
+                                    <h4 class="roboto-flex">Personalized Plans</h4>
+                                    <p class="roboto-flex">Get meal suggestions for your fitness goals</p>
+                                </div>
+                            </div>
+                            <div class="section-plans">
+                                <div class="plans-text-container">
+                                    <h4 class="roboto-flex">Smart Food Insights</h4>
+                                    <p class="roboto-flex">Track carbs, protein, and calories in every meal.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-holder1">
+                        <button><a href="" class="links">Learn More</a></button>
+                    </div>
+                </div>
+                <div class="how-it-works-img-container">
+                    <img src="{% static 'image/how-it-works.png' %}" alt="Not Available" class="how-it-works-img">
+                    <div class="on-img-info">
+                        <a href="" class="roboto-flex">Need help with your nutrition goals?</a>
+                        <h2 class="roboto-flex">Looking for help?</h2>
+                        <p>We're here to guide you with smart food choice to help you gain, loose, or maintain your weight- becked by science and tailored to you</p>
+                    </div>
+                </div>
+            </div>
+{% endblock %}

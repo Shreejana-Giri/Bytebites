@@ -1,0 +1,185 @@
+{% extends "nutrition/base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4 class="mb-0">
+                    <i class="fas fa-user me-2"></i>Profile
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-3">
+                    <i class="fas fa-user-circle fa-5x text-muted"></i>
+                    <h5 class="mt-2">{{ user.username }}</h5>
+                    <p class="text-muted">{{ user.email }}</p>
+                </div>
+                
+                <div class="list-group mt-4">
+                    <a href="{% url 'user_data' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-pencil-alt me-2"></i> Edit Basic Information
+                    </a>
+                    <a href="{% url 'lifestyle' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-running me-2"></i> Update Lifestyle
+                    </a>
+                    <a href="{% url 'goals' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-bullseye me-2"></i> Set Nutrition Goals
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4 class="mb-0">
+                    <i class="fas fa-heartbeat me-2"></i>Health Metrics
+                </h4>
+            </div>
+            <div class="card-body">
+                {% if has_basic_info %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-3 bg-light">
+                            <div class="card-body text-center">
+                                <h3 class="display-4 mb-0">{{ user_profile.bmi|floatformat:1 }}</h3>
+                                <p class="lead">BMI</p>
+                                {% if bmi_category %}
+                                <span class="badge 
+                                    {% if bmi_category == 'Normal weight' %}
+                                        bg-success
+                                    {% elif bmi_category == 'Underweight' %}
+                                        bg-warning
+                                    {% elif bmi_category == 'Overweight' %}
+                                        bg-warning
+                                    {% else %}
+                                        bg-danger
+                                    {% endif %}
+                                ">{{ bmi_category }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-3 bg-light">
+                            <div class="card-body text-center">
+                                <h3 class="display-4 mb-0">{{ user_profile.bmr|floatformat:0 }}</h3>
+                                <p class="lead">BMR (calories/day)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th>Height:</th>
+                                <td>{{ user_profile.height }} cm</td>
+                                <th>Weight:</th>
+                                <td>{{ user_profile.weight }} kg</td>
+                            </tr>
+                            <tr>
+                                <th>Age:</th>
+                                <td>{{ user_profile.age }}</td>
+                                <th>Gender:</th>
+                                <td>{{ user_profile.get_gender_display }}</td>
+                            </tr>
+                            <tr>
+                                <th>Diet Preference:</th>
+                                <td>{{ user_profile.get_diet_preference_display }}</td>
+                                <th>Lifestyle:</th>
+                                <td>{{ user_profile.get_lifestyle_display|default:"Not set" }}</td>
+                            </tr>
+                            <tr>
+                                <th>Goal:</th>
+                                <td>{{ user_profile.get_goal_display|default:"Not set" }}</td>
+                                <th>Daily Calories:</th>
+                                <td>{% if user_profile.daily_calories %}{{ user_profile.daily_calories|floatformat:0 }}{% else %}Not calculated{% endif %}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                {% if user_profile.allergies %}
+                <div class="mt-3">
+                    <h5>Allergies/Restrictions:</h5>
+                    <p>{{ user_profile.allergies }}</p>
+                </div>
+                {% endif %}
+                
+                {% if profile_status_message %}
+                <div class="alert alert-info mt-3">
+                    {{ profile_status_message }}
+                </div>
+                {% endif %}
+                
+                {% else %}
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    You haven't completed your profile yet. Please enter your basic information.
+                </div>
+                <div class="text-center mt-3">
+                    <a href="{% url 'user_data' %}" class="btn btn-primary">Enter Basic Information</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        {% if has_basic_info and has_lifestyle and has_goal %}
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">
+                    <i class="fas fa-utensils me-2"></i>Nutrition Plan
+                </h4>
+            </div>
+            <div class="card-body">
+                {% if latest_diet_plan %}
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle me-2"></i>
+                    You have a personalized diet plan created on {{ latest_diet_plan.date_generated|date:"F j, Y" }}.
+                </div>
+                <div class="text-center">
+                    <a href="{% url 'diet_plan' %}" class="btn btn-primary">View Diet Plan</a>
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#generateNewPlanModal">
+                        Generate New Plan
+                    </button>
+                </div>
+                {% else %}
+                <div class="text-center">
+                    <p>Generate your personalized diet plan based on your profile information.</p>
+                    <a href="{% url 'diet_plan' %}" class="btn btn-primary">Generate Diet Plan</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Modal for generating new plan -->
+<div class="modal fade" id="generateNewPlanModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Generate New Diet Plan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to generate a new diet plan? This will replace your current plan.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form method="post" action="{% url 'diet_plan' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Generate New Plan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

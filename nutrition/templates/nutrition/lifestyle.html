@@ -1,0 +1,82 @@
+{% extends "nutrition/base.html" %}
+
+{% block title %}Lifestyle{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="mb-0">Your Lifestyle</h3>
+            </div>
+            <div class="card-body">
+                <p class="mb-4">Please select your activity level to help us calculate your daily calorie needs.</p>
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="mb-4">
+                        {% for radio in form.lifestyle %}
+                        <div class="card mb-2 lifestyle-option">
+                            <div class="card-body">
+                                <div class="form-check">
+                                    {{ radio.tag }}
+                                    <label class="form-check-label" for="{{ radio.id_for_label }}">
+                                        <strong>{{ radio.choice_label }}</strong>
+                                    </label>
+                                </div>
+                                <div class="ms-4 mt-2 text-muted small">
+                                    {% if radio.choice_value == 'sedentary' %}
+                                        Little to no regular exercise, desk job or mostly sitting throughout the day.
+                                    {% elif radio.choice_value == 'lightly_active' %}
+                                        Light exercise or sports 1-3 days per week, or active job with occasional walking.
+                                    {% elif radio.choice_value == 'moderately_active' %}
+                                        Moderate exercise or sports 3-5 days per week, or job with regular physical activity.
+                                    {% elif radio.choice_value == 'very_active' %}
+                                        Hard exercise or sports 6-7 days per week, or physically demanding job.
+                                    {% elif radio.choice_value == 'athletic' %}
+                                        Intense training 2x per day, or professional athlete level activity.
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Save and Continue</button>
+                        <a href="{% url 'profile' %}" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .lifestyle-option:hover {
+        border-color: var(--primary-color);
+        cursor: pointer;
+    }
+    
+    /* Style for the form check inputs to make the whole card clickable */
+    .lifestyle-option .form-check-input {
+        float: left;
+        margin-right: 10px;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Make the whole card clickable for the radio options
+        const lifestyleOptions = document.querySelectorAll('.lifestyle-option');
+        
+        lifestyleOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                radio.checked = true;
+            });
+        });
+    });
+</script>
+{% endblock %}
