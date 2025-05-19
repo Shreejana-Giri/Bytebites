@@ -16,10 +16,10 @@
       <div class="wrapper">
         <div class="text-section">
           <h1 class="header-one">FUEL YOUR FITNESS JOURNEY</h1>
-          <p>Eat smart , Move strong</p>
+          <p class="hero-text">Eat smart , Move strong</p>
           {% if not user.is_authenticated %}
             <div class="mt-4">
-                <a href="{% url 'register' %}" class="btn btn-primary btn-lg me-2">Get Started</a>
+                <a href="{% url 'register' %}" class="btn btn-primary btn-lg me-2 hero-btn">Get Started</a>
                 <a href="{% url 'login' %}" class="btn btn-outline-secondary btn-lg">Login</a>
             </div>
             {% else %}
@@ -93,7 +93,7 @@
     </div>
 
 
-    <h1 class="nunito-sans header-our-features">See what others are saying</h1>
+    <h1 class="nunito-sans header-our-features see-what-test">See what others are saying</h1>
 
 
 
