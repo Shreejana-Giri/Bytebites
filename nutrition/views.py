@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from .forms import (UserRegisterForm, UserProfileForm, LifestyleForm, 
+from .forms import (UserRegisterForm, UserProfileForm, LifestyleForm,
                    GoalForm, ProgressRecordForm, FoodCalorieEstimationForm)
 from .models import UserProfile, DietPlan, ProgressRecord, FoodCalorieEstimation
 from .gemini_client import GeminiClient
@@ -35,14 +35,14 @@ def profile(request):
     try:
         user_profile = UserProfile.objects.get(user=request.user)
         has_basic_info = all([
-            user_profile.height, 
-            user_profile.weight, 
-            user_profile.age, 
+            user_profile.height,
+            user_profile.weight,
+            user_profile.age,
             user_profile.gender
         ])
         has_lifestyle = bool(user_profile.lifestyle)
         has_goal = bool(user_profile.goal)
-        
+
         bmi_category = None
         if user_profile.bmi:
             if user_profile.bmi < 18.5:
@@ -53,13 +53,13 @@ def profile(request):
                 bmi_category = "Overweight"
             else:
                 bmi_category = "Obese"
-                
-        
+
+
         latest_diet_plan = DietPlan.objects.filter(user=request.user).order_by('-date_generated').first()
-        
-        
+
+
         profile_status_message = get_dietary_status_message(user_profile)
-        
+
         context = {
             'user_profile': user_profile,
             'has_basic_info': has_basic_info,
@@ -81,25 +81,25 @@ def user_data(request):
         profile = UserProfile.objects.get(user=request.user)
     except UserProfile.DoesNotExist:
         profile = UserProfile(user=request.user)
-    
+
     if request.method == 'POST':
         form = UserProfileForm(request.POST, instance=profile)
         if form.is_valid():
             user_profile = form.save(commit=False)
-            
+
             user_profile.calculate_bmi()
             user_profile.calculate_bmr()
             user_profile.save()
-            
+
             messages.success(request, "Personal information updated successfully!")
-            
+
             if user_profile.lifestyle:
                 return redirect('goals')
             else:
                 return redirect('lifestyle')
     else:
         form = UserProfileForm(instance=profile)
-    
+
     return render(request, 'nutrition/user_data.html', {'form': form})
 
 @login_required
@@ -110,7 +110,7 @@ def lifestyle(request):
         profile = UserProfile.objects.create(user=request.user)
         messages.info(request, "Your profile has been created. Please complete your personal information first.")
         return redirect('user_data')
-    
+
     if request.method == 'POST':
         form = LifestyleForm(request.POST, instance=profile)
         if form.is_valid():
@@ -119,7 +119,7 @@ def lifestyle(request):
             return redirect('goals')
     else:
         form = LifestyleForm(instance=profile)
-    
+
     return render(request, 'nutrition/lifestyle.html', {'form': form})
 
 @login_required
@@ -130,29 +130,29 @@ def goals(request):
         profile = UserProfile.objects.create(user=request.user)
         messages.info(request, "Your profile has been created. Please complete your personal information first.")
         return redirect('user_data')
-    
+
     if not profile.height or not profile.weight or not profile.age or not profile.gender:
         messages.warning(request, "Please complete your basic information before setting goals.")
         return redirect('user_data')
-        
+
     if not profile.lifestyle:
         messages.warning(request, "Please select your lifestyle before setting goals.")
         return redirect('lifestyle')
-    
+
     if request.method == 'POST':
         form = GoalForm(request.POST, instance=profile)
         if form.is_valid():
             user_profile = form.save(commit=False)
-            
+
             # Calculate daily calories
             user_profile.calculate_daily_calories()
             user_profile.save()
-            
+
             messages.success(request, "Goals updated successfully!")
             return redirect('diet_plan')
     else:
         form = GoalForm(instance=profile)
-    
+
     return render(request, 'nutrition/goals.html', {'form': form})
 
 @login_required
@@ -160,9 +160,9 @@ def diet_plan(request):
     try:
         profile = UserProfile.objects.get(user=request.user)
     except UserProfile.DoesNotExist:
-        
+
         messages.info(request, "Please set up your profile to get started.")
-        return redirect('user_data') 
+        return redirect('user_data')
 
     required_fields = [
         profile.height, profile.weight, profile.age, profile.gender,
@@ -170,30 +170,30 @@ def diet_plan(request):
     ]
     if not all(required_fields):
         messages.warning(request, "Your profile is incomplete. Please update all required fields (personal info, lifestyle, goal, diet preference) to generate a diet plan.")
-        return redirect('profile') 
+        return redirect('profile')
 
-  
+
     if not profile.bmi:
         profile.calculate_bmi()
     if not profile.bmr:
         profile.calculate_bmr()
     if not profile.daily_calories:
         profile.calculate_daily_calories()
-   
+
     if not all([profile.bmi, profile.bmr, profile.daily_calories]):
-        profile.save() 
+        profile.save()
 
     latest_plan = DietPlan.objects.filter(user=request.user).order_by('-date_generated').first()
-    error_message = None 
+    error_message = None
 
-    if request.method == 'POST': 
+    if request.method == 'POST':
         if not settings.GEMINI_API_KEY:
             messages.error(request, "Gemini API key is not configured. Please contact the administrator.")
-            
+
             error_message = "Gemini API key is not configured. Cannot generate plan."
             return render(request, 'nutrition/diet_plan.html', {
                 'profile': profile,
-                'diet_plan': latest_plan, 
+                'diet_plan': latest_plan,
                 'error': error_message
             })
 
@@ -216,7 +216,7 @@ def diet_plan(request):
             - make sure the diet is in nepali style as this is tailored made for nepali people
 
             The diet plan should strictly adhere to the Daily Calorie Target of {profile.daily_calories:.0f} calories.
-            
+
             Please provide in such format:
             1.  A summary section stating the "Estimated Daily Calorie Target: {profile.daily_calories:.0f} calories".
             2.  Detailed meal suggestions for:
@@ -249,16 +249,16 @@ def diet_plan(request):
             Start the entire response with the calorie target summary.
             """
 
-           
-            generated_text = gemini_client.generate_text(prompt)
-           
 
-            
-            parsed_daily_calories = profile.daily_calories 
+            generated_text = gemini_client.generate_text(prompt)
+
+
+
+            parsed_daily_calories = profile.daily_calories
             try:
                 for line in generated_text.split('\n'):
                     if "estimated daily calorie target:" in line.lower():
-                       
+
                         import re
                         match = re.search(r'(\d+)\s*calories', line.lower())
                         if match:
@@ -266,36 +266,36 @@ def diet_plan(request):
                             break
             except Exception as e:
                 print(f"Could not parse calories from Gemini response: {e}")
-               
 
-           
-            if latest_plan: 
-                latest_plan.diet_plan = generated_text 
+
+
+            if latest_plan:
+                latest_plan.diet_plan = generated_text
                 latest_plan.daily_calories = parsed_daily_calories
                 latest_plan.date_generated = timezone.now()
                 latest_plan.save()
-            else: 
+            else:
                 latest_plan = DietPlan.objects.create(
                     user=request.user,
-                    diet_plan=generated_text, 
+                    diet_plan=generated_text,
                     daily_calories=parsed_daily_calories,
                     date_generated=timezone.now()
                 )
-            
+
             messages.success(request, "New diet plan generated successfully!")
             return redirect('diet_plan')
 
         except Exception as e:
-            
+
             error_message = f"An error occurred while generating the diet plan: {str(e)}"
             messages.error(request, error_message)
-            print(f"Error in diet_plan generation: {e}") 
+            print(f"Error in diet_plan generation: {e}")
 
-    
+
     return render(request, 'nutrition/diet_plan.html', {
         'profile': profile,
         'diet_plan': latest_plan,
-        'error': error_message 
+        'error': error_message
     })
 
 def aboutus(request):
@@ -303,4 +303,10 @@ def aboutus(request):
 
 def how_it_works(request):
     return render(request, 'nutrition/how-it-works.html')
+
+def chatbot(request):
+    """
+    View for the chatbot interface using WebSockets
+    """
+    return render(request, 'nutrition/chatbot.html')
 

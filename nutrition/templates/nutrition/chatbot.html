@@ -1,0 +1,120 @@
+{% extends 'nutrition/base.html' %}
+{% load static %}
+
+{% block title %}Nutrition Chatbot{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/chatbot.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="chatbot-container">
+    <div class="wrapper">
+        <div class="chatbot-header">
+            <h1>🌿 Nepali Nutrition & Wellness Assistant</h1>
+            <p>Ask me anything about nutrition, diet plans, and healthy eating habits with a focus on Nepali cuisine!</p>
+        </div>
+
+        <div class="chat-interface">
+            <div class="chat-messages" id="chat-messages">
+                <!-- Messages will be added here dynamically -->
+            </div>
+
+            <div class="chat-input-container">
+                <input type="text" id="chat-input" placeholder="Type your message here..." class="chat-input">
+                <button id="send-button" class="send-button">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const sendButton = document.getElementById('send-button');
+
+        // Create WebSocket connection
+        const chatSocket = new WebSocket(
+            'ws://' + window.location.hostname + ':8001/ws/chat/'
+        );
+
+        // Connection opened
+        chatSocket.onopen = function(e) {
+            console.log('WebSocket connection established');
+        };
+
+        // Listen for messages
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            addMessage(data.message, data.sender);
+
+            // Scroll to the bottom of the chat
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        };
+
+        // Connection closed
+        chatSocket.onclose = function(e) {
+            console.error('WebSocket connection closed');
+            addMessage('Connection lost. Please refresh the page to reconnect.', 'system');
+        };
+
+        // Connection error
+        chatSocket.onerror = function(e) {
+            console.error('WebSocket error:', e);
+            addMessage('Error connecting to the chat. Please try again later.', 'system');
+        };
+
+        // Send message when button is clicked
+        sendButton.addEventListener('click', sendMessage);
+
+        // Send message when Enter key is pressed
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (message) {
+                // Add user message to chat
+                addMessage(message, 'user');
+
+                // Send message to server
+                chatSocket.send(JSON.stringify({
+                    'message': message
+                }));
+
+                // Clear input field
+                chatInput.value = '';
+
+                // Scroll to the bottom of the chat
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        }
+
+        function addMessage(message, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('chat-message', sender);
+
+            const contentElement = document.createElement('div');
+            contentElement.classList.add('message-content');
+            contentElement.innerHTML = formatMessage(message);
+
+            messageElement.appendChild(contentElement);
+            chatMessages.appendChild(messageElement);
+        }
+
+        function formatMessage(message) {
+            // Convert URLs to links
+            const urlRegex = /(https?:\/\/[^\s]+)/g;
+            return message.replace(urlRegex, function(url) {
+                return '<a href="' + url + '" target="_blank">' + url + '</a>';
+            }).replace(/\n/g, '<br>');
+        }
+    });
+</script>
+{% endblock %}

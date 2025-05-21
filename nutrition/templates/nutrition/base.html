@@ -302,6 +302,11 @@ h3.section-sub-title strong {
                     <li class="links">
                         <a class="anchor" href="{% url 'diet_plan' %}">Diet Plan</a>
                     </li>
+                    <li class="links">
+                        <a class="anchor" href="{% url 'chatbot' %}">
+                            <i class="fas fa-robot"></i> Chatbot
+                        </a>
+                    </li>
                     {% comment %} <li class="links">
                         <a class="anchor" href="#">Track Progress</a>
                     </li>
@@ -435,8 +440,8 @@ h3.section-sub-title strong {
         <div class="footer-features">
           <h3 class="footer-header poppins-bold footer-features">Features</h3>
           <ul class="features-holder">
-            <li class="features-text inter"><a href="" class="anchor-text inter">Diet Plans</a></li>
-            <li class="features-text"><a href="" class="anchor-text inter">AI Chatbot</a></li>
+            <li class="features-text inter"><a href="{% url 'diet_plan' %}" class="anchor-text inter">Diet Plans</a></li>
+            <li class="features-text"><a href="{% url 'chatbot' %}" class="anchor-text inter">AI Chatbot</a></li>
             <li class="features-text"><a href="" class="anchor-text inter">Progress Tracking</a></li>
             <li class="features-text"><a href="" class="anchor-text inter">Recipes</a></li>
           </ul>

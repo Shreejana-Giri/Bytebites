@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
     'nutrition',
 ]
 
@@ -47,6 +48,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'bytebites.wsgi.application'
+ASGI_APPLICATION = 'bytebites.asgi.application'
+
+# Channel Layers for WebSocket
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

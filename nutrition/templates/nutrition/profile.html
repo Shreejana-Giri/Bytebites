@@ -1,163 +1,171 @@
 {% extends "nutrition/base.html" %}
+{% load static %}
 
 {% block title %}Profile{% endblock %}
 
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
 {% block content %}
-<div class="row">
-    <div class="col-md-4">
-        <div class="card mb-4">
-            <div class="card-header">
-                <h4 class="mb-0">
-                    <i class="fas fa-user me-2"></i>Profile
-                </h4>
-            </div>
-            <div class="card-body">
-                <div class="text-center mb-3">
-                    <i class="fas fa-user-circle fa-5x text-muted"></i>
-                    <h5 class="mt-2">{{ user.username }}</h5>
-                    <p class="text-muted">{{ user.email }}</p>
+<div class="profile-container">
+    <div class="profile-layout">
+        <!-- Left Column - User Profile -->
+        <div class="profile-sidebar">
+            <div class="profile-card">
+                <div class="profile-card-header">
+                    <i class="fas fa-user"></i>
+                    <h4>Profile</h4>
                 </div>
-                
-                <div class="list-group mt-4">
-                    <a href="{% url 'user_data' %}" class="list-group-item list-group-item-action">
-                        <i class="fas fa-pencil-alt me-2"></i> Edit Basic Information
-                    </a>
-                    <a href="{% url 'lifestyle' %}" class="list-group-item list-group-item-action">
-                        <i class="fas fa-running me-2"></i> Update Lifestyle
-                    </a>
-                    <a href="{% url 'goals' %}" class="list-group-item list-group-item-action">
-                        <i class="fas fa-bullseye me-2"></i> Set Nutrition Goals
-                    </a>
+                <div class="profile-card-body">
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <h3 class="user-name">{{ user.username }}</h3>
+                        <p class="user-email">{{ user.email }}</p>
+                    </div>
+
+                    <div class="profile-nav">
+                        <a href="{% url 'user_data' %}" class="profile-nav-item">
+                            <i class="fas fa-pencil-alt"></i> Edit Basic Information
+                        </a>
+                        <a href="{% url 'lifestyle' %}" class="profile-nav-item">
+                            <i class="fas fa-running"></i> Update Lifestyle
+                        </a>
+                        <a href="{% url 'goals' %}" class="profile-nav-item">
+                            <i class="fas fa-bullseye"></i> Set Nutrition Goals
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="col-md-8">
-        <div class="card mb-4">
-            <div class="card-header">
-                <h4 class="mb-0">
-                    <i class="fas fa-heartbeat me-2"></i>Health Metrics
-                </h4>
-            </div>
-            <div class="card-body">
-                {% if has_basic_info %}
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card mb-3 bg-light">
-                            <div class="card-body text-center">
-                                <h3 class="display-4 mb-0">{{ user_profile.bmi|floatformat:1 }}</h3>
-                                <p class="lead">BMI</p>
-                                {% if bmi_category %}
-                                <span class="badge 
-                                    {% if bmi_category == 'Normal weight' %}
-                                        bg-success
-                                    {% elif bmi_category == 'Underweight' %}
-                                        bg-warning
-                                    {% elif bmi_category == 'Overweight' %}
-                                        bg-warning
-                                    {% else %}
-                                        bg-danger
-                                    {% endif %}
-                                ">{{ bmi_category }}</span>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card mb-3 bg-light">
-                            <div class="card-body text-center">
-                                <h3 class="display-4 mb-0">{{ user_profile.bmr|floatformat:0 }}</h3>
-                                <p class="lead">BMR (calories/day)</p>
-                            </div>
-                        </div>
-                    </div>
+
+        <!-- Right Column - Health Metrics & Diet Plan -->
+        <div class="profile-main">
+            <!-- Health Metrics Card -->
+            <div class="profile-card">
+                <div class="profile-card-header">
+                    <i class="fas fa-heartbeat"></i>
+                    <h4>Health Metrics</h4>
                 </div>
-                
-                <div class="table-responsive">
-                    <table class="table table-bordered">
+                <div class="profile-card-body">
+                    {% if has_basic_info %}
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-value">{{ user_profile.bmi|floatformat:1 }}</div>
+                            <div class="metric-label">Body Mass Index</div>
+                            {% if bmi_category %}
+                            <span class="metric-badge
+                                {% if bmi_category == 'Normal weight' %}
+                                    badge-success
+                                {% elif bmi_category == 'Underweight' %}
+                                    badge-warning
+                                {% elif bmi_category == 'Overweight' %}
+                                    badge-warning
+                                {% else %}
+                                    badge-danger
+                                {% endif %}
+                            ">{{ bmi_category }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">{{ user_profile.bmr|floatformat:0 }}</div>
+                            <div class="metric-label">Basal Metabolic Rate</div>
+                            <span class="metric-badge badge-info">calories/day</span>
+                        </div>
+                    </div>
+
+                    <table class="profile-table">
                         <tbody>
                             <tr>
-                                <th>Height:</th>
+                                <th>Height</th>
                                 <td>{{ user_profile.height }} cm</td>
-                                <th>Weight:</th>
+                                <th>Weight</th>
                                 <td>{{ user_profile.weight }} kg</td>
                             </tr>
                             <tr>
-                                <th>Age:</th>
+                                <th>Age</th>
                                 <td>{{ user_profile.age }}</td>
-                                <th>Gender:</th>
+                                <th>Gender</th>
                                 <td>{{ user_profile.get_gender_display }}</td>
                             </tr>
                             <tr>
-                                <th>Diet Preference:</th>
+                                <th>Diet Preference</th>
                                 <td>{{ user_profile.get_diet_preference_display }}</td>
-                                <th>Lifestyle:</th>
+                                <th>Lifestyle</th>
                                 <td>{{ user_profile.get_lifestyle_display|default:"Not set" }}</td>
                             </tr>
                             <tr>
-                                <th>Goal:</th>
+                                <th>Goal</th>
                                 <td>{{ user_profile.get_goal_display|default:"Not set" }}</td>
-                                <th>Daily Calories:</th>
+                                <th>Daily Calories</th>
                                 <td>{% if user_profile.daily_calories %}{{ user_profile.daily_calories|floatformat:0 }}{% else %}Not calculated{% endif %}</td>
                             </tr>
                         </tbody>
                     </table>
+
+                    {% if user_profile.allergies %}
+                    <div class="allergies-section">
+                        <h5>Allergies & Dietary Restrictions</h5>
+                        <p>{{ user_profile.allergies }}</p>
+                    </div>
+                    {% endif %}
+
+                    {% if profile_status_message %}
+                    <div class="profile-alert info">
+                        <i class="fas fa-info-circle"></i>
+                        <div>{{ profile_status_message }}</div>
+                    </div>
+                    {% endif %}
+
+                    {% else %}
+                    <div class="profile-alert warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>You haven't completed your profile yet. Please enter your basic information to get personalized nutrition recommendations.</div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="{% url 'user_data' %}" class="profile-btn primary">
+                            <i class="fas fa-pencil-alt"></i> Enter Basic Information
+                        </a>
+                    </div>
+                    {% endif %}
                 </div>
-                
-                {% if user_profile.allergies %}
-                <div class="mt-3">
-                    <h5>Allergies/Restrictions:</h5>
-                    <p>{{ user_profile.allergies }}</p>
-                </div>
-                {% endif %}
-                
-                {% if profile_status_message %}
-                <div class="alert alert-info mt-3">
-                    {{ profile_status_message }}
-                </div>
-                {% endif %}
-                
-                {% else %}
-                <div class="alert alert-warning">
-                    <i class="fas fa-exclamation-triangle me-2"></i>
-                    You haven't completed your profile yet. Please enter your basic information.
-                </div>
-                <div class="text-center mt-3">
-                    <a href="{% url 'user_data' %}" class="btn btn-primary">Enter Basic Information</a>
-                </div>
-                {% endif %}
             </div>
+
+            <!-- Nutrition Plan Card -->
+            {% if has_basic_info and has_lifestyle and has_goal %}
+            <div class="profile-card">
+                <div class="profile-card-header">
+                    <i class="fas fa-utensils"></i>
+                    <h4>Nutrition Plan</h4>
+                </div>
+                <div class="profile-card-body">
+                    {% if latest_diet_plan %}
+                    <div class="profile-alert success">
+                        <i class="fas fa-check-circle"></i>
+                        <div>You have a personalized diet plan created on <strong>{{ latest_diet_plan.date_generated|date:"F j, Y" }}</strong>.</div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="{% url 'diet_plan' %}" class="profile-btn primary">
+                            <i class="fas fa-eye"></i> View Diet Plan
+                        </a>
+                        <button type="button" class="profile-btn outline" data-bs-toggle="modal" data-bs-target="#generateNewPlanModal">
+                            <i class="fas fa-sync-alt"></i> Generate New Plan
+                        </button>
+                    </div>
+                    {% else %}
+                    <div class="text-center">
+                        <p>Generate your personalized diet plan based on your profile information.</p>
+                        <a href="{% url 'diet_plan' %}" class="profile-btn primary">
+                            <i class="fas fa-magic"></i> Generate Diet Plan
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
         </div>
-        
-        {% if has_basic_info and has_lifestyle and has_goal %}
-        <div class="card">
-            <div class="card-header">
-                <h4 class="mb-0">
-                    <i class="fas fa-utensils me-2"></i>Nutrition Plan
-                </h4>
-            </div>
-            <div class="card-body">
-                {% if latest_diet_plan %}
-                <div class="alert alert-success">
-                    <i class="fas fa-check-circle me-2"></i>
-                    You have a personalized diet plan created on {{ latest_diet_plan.date_generated|date:"F j, Y" }}.
-                </div>
-                <div class="text-center">
-                    <a href="{% url 'diet_plan' %}" class="btn btn-primary">View Diet Plan</a>
-                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#generateNewPlanModal">
-                        Generate New Plan
-                    </button>
-                </div>
-                {% else %}
-                <div class="text-center">
-                    <p>Generate your personalized diet plan based on your profile information.</p>
-                    <a href="{% url 'diet_plan' %}" class="btn btn-primary">Generate Diet Plan</a>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-        {% endif %}
     </div>
 </div>
 
@@ -165,18 +173,28 @@
 <div class="modal fade" id="generateNewPlanModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Generate New Diet Plan</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header profile-modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-sync-alt me-2"></i>
+                    Generate New Diet Plan
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <p>Are you sure you want to generate a new diet plan? This will replace your current plan.</p>
+            <div class="modal-body profile-modal-body">
+                <div class="profile-alert warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>Are you sure you want to generate a new diet plan? This will replace your current plan.</div>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <div class="modal-footer profile-modal-footer">
+                <button type="button" class="profile-btn outline" data-bs-dismiss="modal">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
                 <form method="post" action="{% url 'diet_plan' %}">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-primary">Generate New Plan</button>
+                    <button type="submit" class="profile-btn primary">
+                        <i class="fas fa-check"></i> Generate New Plan
+                    </button>
                 </form>
             </div>
         </div>

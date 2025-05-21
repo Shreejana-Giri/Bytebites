@@ -3,53 +3,113 @@
 
 {% block title %}How It Works{% endblock %}
 
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/how-it-works.css' %}">
+{% endblock %}
+
 {% block content %}
- <div class="how-it-works-container">
-            <div class="wrapper">
-                <div class="how-it-works-text-container">
-                    <div class="main-text-section">
-                        <h1 class="roboto-flex">How it works?</h1>
-                        <pre class="nunito-sans">
-Our platform is designed to be user-friendly and 
-intuitive. Simply sign up and explore our features. You 
-can easily customize your experience based on your preferences.
+<div class="how-it-works-container">
+    <div class="wrapper">
+        <!-- Left Column - Text Content -->
+        <div class="how-it-works-text-container">
+            <div class="main-text-section">
+                <h1>How It Works</h1>
+                <pre>
+ByteBites is designed to be user-friendly and intuitive.
+Simply sign up and explore our features to create a
+personalized nutrition plan that fits your lifestyle and goals.
 
-Each tool is carefully crafted to ensure smooth
-functionality. We aim to make your tasks easier with 
-minimal effort.
+Each tool is carefully crafted to ensure smooth functionality
+and accurate nutrition guidance. We aim to make healthy eating
+easier with minimal effort.
 
-Enjoy seamless navigation, allowing you to focus on 
-what matters most. We're here to help every step of the 
-way!
-                        </pre>
-                    </div>
-                    <div class="plans-container">
-                        <div class="plan-section">
-                            <div class="section-plans">
-                                <div class="plans-text-container">
-                                    <h4 class="roboto-flex">Personalized Plans</h4>
-                                    <p class="roboto-flex">Get meal suggestions for your fitness goals</p>
-                                </div>
-                            </div>
-                            <div class="section-plans">
-                                <div class="plans-text-container">
-                                    <h4 class="roboto-flex">Smart Food Insights</h4>
-                                    <p class="roboto-flex">Track carbs, protein, and calories in every meal.</p>
-                                </div>
-                            </div>
+Enjoy seamless navigation, allowing you to focus on what
+matters most - your health and nutrition goals. We're here
+to help every step of the way!
+                </pre>
+            </div>
+
+            <div class="plans-container">
+                <div class="plan-section">
+                    <div class="section-plans">
+                        <div class="plans-text-container">
+                            <h4>Personalized Plans</h4>
+                            <p>Get customized meal suggestions tailored to your specific fitness goals, dietary preferences, and nutritional needs.</p>
                         </div>
                     </div>
-                    <div class="button-holder1">
-                        <button><a href="" class="links">Learn More</a></button>
-                    </div>
-                </div>
-                <div class="how-it-works-img-container">
-                    <img src="{% static 'image/how-it-works.png' %}" alt="Not Available" class="how-it-works-img">
-                    <div class="on-img-info">
-                        <a href="" class="roboto-flex">Need help with your nutrition goals?</a>
-                        <h2 class="roboto-flex">Looking for help?</h2>
-                        <p>We're here to guide you with smart food choice to help you gain, loose, or maintain your weight- becked by science and tailored to you</p>
+                    <div class="section-plans">
+                        <div class="plans-text-container">
+                            <h4>Smart Food Insights</h4>
+                            <p>Track macronutrients (carbs, protein, and fats) and calories in every meal with our intelligent nutrition analysis.</p>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <div class="button-holder1">
+                <a href="{% url 'register' %}" class="how-it-works-btn">
+                    <i class="fas fa-user-plus"></i> Get Started
+                </a>
+            </div>
+        </div>
+
+        <!-- Right Column - Image -->
+        <div class="how-it-works-img-container">
+            <img src="{% static 'image/how-it-works.png' %}" alt="Nutrition Planning" class="how-it-works-img">
+            <div class="on-img-info">
+                <a href="{% url 'register' %}">Need help with your nutrition goals?</a>
+                <h2>Looking for guidance?</h2>
+                <p>We're here to help you with smart food choices to help you gain, lose, or maintain your weight - backed by science and tailored to your individual needs.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Steps Section -->
+    <div class="how-it-works-steps">
+        <div class="wrapper">
+            <div class="steps-header">
+                <h2>Simple Steps to Better Nutrition</h2>
+                <p>Follow these easy steps to get started with ByteBites and begin your journey to better health through personalized nutrition.</p>
+            </div>
+
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3 class="step-title">Create Your Account</h3>
+                    <p class="step-description">Sign up for a free account to access all our nutrition planning features and personalized recommendations.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <h3 class="step-title">Complete Your Profile</h3>
+                    <p class="step-description">Enter your health metrics, dietary preferences, and fitness goals to help us create your personalized plan.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3 class="step-title">Get Your Diet Plan</h3>
+                    <p class="step-description">Receive a customized nutrition plan with meal suggestions that align with your goals and preferences.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="step-title">Track Your Progress</h3>
+                    <p class="step-description">Monitor your nutrition journey, adjust your plan as needed, and celebrate your achievements.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
