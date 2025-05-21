@@ -87,7 +87,7 @@ button {
   align-items: center;
   transition: background-color 0.3s ease, color 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  
+
 }
 
 button a {
@@ -176,7 +176,7 @@ footer {
   height: 2px;
   border: none;
   margin: 0;
-} 
+}
 
 .link-holder {
   display: flex;
@@ -234,10 +234,6 @@ footer {
 
 
 
-
-.wrapper {
-  border: red 1px solid;
-}
 
 .wrapper {
     height: 100%;
@@ -306,7 +302,7 @@ footer {
   list-style: none;
 }
 
-.links a {
+.links a, .links button.anchor {
   text-decoration: none;
   color: #000000;
   font-family: "Nunito Sans", sans-serif;
@@ -315,7 +311,10 @@ footer {
   border-radius: 5px;
   transition: background-color 0.3s ease, color 0.3s ease;
   font-weight: 700;
+}
 
+.links button.anchor:hover {
+  text-decoration: underline;
 }
 
 .profile-section {
@@ -499,7 +498,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: left;
-  
+
   gap: 0;
   flex-direction: column;
   text-align: center;
@@ -638,10 +637,10 @@ footer {
   align-items: center;
   flex-direction: column;
   gap: 0.4vw;
- 
+
   left: 25%;
   bottom: -30px;
- 
+
 }
 
 .profile-holder {
@@ -655,7 +654,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
 }
 
 .users-info1 .profile-holder img {
@@ -686,7 +685,7 @@ footer {
 .about-text-section p {
 
   font-size: 1.2rem;
- 
+
 }
 
 

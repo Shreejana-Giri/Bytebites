@@ -1,0 +1,360 @@
+/* Enhanced Testimonials Styling */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #87B53D;
+  --secondary-color: #814F4F;
+  --accent-color: #FFC107;
+  --light-color: #FFFFFF;
+  --dark-color: #333333;
+  --gray-color: #F5F5F5;
+  --text-color: #333333;
+  --text-secondary: #666666;
+  --border-radius: 16px;
+  --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --transition: all 0.3s ease;
+}
+
+/* Testimonials Section Container */
+.testimonials-section {
+  padding: 4rem 0;
+  background-color: var(--gray-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonials-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(135, 181, 61, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(129, 79, 79, 0.05) 0%, transparent 20%);
+  z-index: 0;
+}
+
+.testimonials-section .wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* Section Header */
+.testimonials-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.testimonials-header h2 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.testimonials-header h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+}
+
+.testimonials-header p {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Testimonial Container */
+.testimonial-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  position: relative;
+}
+
+/* Central Image */
+.testimonial-central-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.testimonial-central-image img {
+  max-width: 300px;
+  height: auto;
+  border-radius: 50%;
+  border: 5px solid var(--light-color);
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+}
+
+.testimonial-central-image img:hover {
+  transform: scale(1.05);
+}
+
+/* Testimonials Row */
+.testimonials-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Individual Testimonial Card */
+.testimonial {
+  background-color: var(--light-color);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: var(--box-shadow);
+  flex: 1;
+  min-width: 280px;
+  max-width: 400px;
+  position: relative;
+  transition: var(--transition);
+  border: none;
+  margin: 0;
+}
+
+.testimonial:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* Quote Icon */
+.testimonial::before {
+  content: '"';
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  font-size: 6rem;
+  color: var(--primary-color);
+  opacity: 0.2;
+  font-family: serif;
+  line-height: 1;
+}
+
+/* User Profile */
+.image-with-text {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--light-color);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-right: 1rem;
+}
+
+.profile-text-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-text-container h3 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0 0 0.25rem 0;
+}
+
+.date {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Stars Rating */
+.stars {
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+}
+
+/* Testimonial Content */
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+.message {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  margin: 0;
+}
+
+/* Call to Action Section */
+.cta-section {
+  background-color: var(--secondary-color);
+  padding: 5rem 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 44px 44px 0 0;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 30%),
+    radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 30%);
+  z-index: 0;
+}
+
+.cta-container {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.cta-container h2 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--light-color);
+  margin-bottom: 1.5rem;
+}
+
+.cta-container p {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2.5rem;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.cta-button {
+  display: inline-block;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button.primary {
+  background-color: var(--light-color);
+  color: var(--secondary-color);
+}
+
+.cta-button.primary:hover {
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  transform: translateY(-3px);
+}
+
+.cta-button.secondary {
+  background-color: transparent;
+  color: var(--light-color);
+  border: 2px solid var(--light-color);
+}
+
+.cta-button.secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .testimonials-row {
+    justify-content: center;
+  }
+
+  .testimonial {
+    max-width: 100%;
+  }
+
+  .cta-container h2 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .testimonial-central-image img {
+    max-width: 200px;
+  }
+
+  .testimonials-header h2 {
+    font-size: 2rem;
+  }
+
+  .cta-container h2 {
+    font-size: 1.8rem;
+  }
+
+  .cta-container p {
+    font-size: 1rem;
+  }
+
+  .cta-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .testimonial {
+    padding: 1.5rem;
+  }
+
+  .testimonial::before {
+    font-size: 4rem;
+  }
+
+  .avatar {
+    width: 50px;
+    height: 50px;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cta-button {
+    width: 100%;
+    text-align: center;
+  }
+}

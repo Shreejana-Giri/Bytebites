@@ -4,7 +4,10 @@ from django.contrib.auth.models import User
 from .models import UserProfile, ProgressRecord, FoodCalorieEstimation
 
 class UserRegisterForm(UserCreationForm):
-    email = forms.EmailField()
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Email address'}))
+    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm password'}))
 
     class Meta:
         model = User
@@ -15,16 +18,16 @@ class UserProfileForm(forms.ModelForm):
         ('M', 'Male'),
         ('F', 'Female'),
     ]
-    
+
     DIET_PREFERENCE_CHOICES = [
         ('veg', 'Vegetarian'),
         ('non-veg', 'Non-Vegetarian'),
     ]
-    
+
     gender = forms.ChoiceField(choices=GENDER_CHOICES, widget=forms.RadioSelect)
     diet_preference = forms.ChoiceField(choices=DIET_PREFERENCE_CHOICES, widget=forms.RadioSelect)
     allergies = forms.CharField(widget=forms.Textarea, required=False)
-    
+
     class Meta:
         model = UserProfile
         fields = ['height', 'weight', 'age', 'gender', 'diet_preference', 'allergies']
@@ -37,9 +40,9 @@ class LifestyleForm(forms.ModelForm):
         ('very_active', 'Very Active (hard exercise/sports 6-7 days a week)'),
         ('athletic', 'Athletic (very hard exercise, training, or physical job)')
     ]
-    
+
     lifestyle = forms.ChoiceField(choices=LIFESTYLE_CHOICES, widget=forms.RadioSelect)
-    
+
     class Meta:
         model = UserProfile
         fields = ['lifestyle']
@@ -51,9 +54,9 @@ class GoalForm(forms.ModelForm):
         ('gain', 'Gain weight/bulk up'),
         ('cut', 'Cut (lose fat while preserving muscle)')
     ]
-    
+
     goal = forms.ChoiceField(choices=GOAL_CHOICES, widget=forms.RadioSelect)
-    
+
     class Meta:
         model = UserProfile
         fields = ['goal']

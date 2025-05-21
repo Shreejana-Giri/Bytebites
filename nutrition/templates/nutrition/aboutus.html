@@ -1,39 +1,215 @@
 {% extends 'nutrition/base.html' %}
 {% load static %}
-{% block title %}About Us{% endblock %}
+{% block title %}About Us - Innovation Project{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/aboutus.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endblock %}
 
 {% block content %}
- <div class="about-section">
-            <div class="wrapper">
-                <div class="about-image-section">
-                    <div class="users-info">
-                        <p class="roboto-flex">Users</p>
-                        <p class="roboto-flex">300+</p>
-                    </div>
+<div class="aboutus-container">
+    <!-- Breadcrumbs -->
+    <div class="wrapper">
+        <div class="breadcrumbs">
+            <a href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a>
+            <span class="separator">/</span>
+            <span class="current">About Us</span>
+        </div>
+    </div>
 
-                    <div class="users-info1">
-                        <div class="profile-holder">
-                            <img src="{% static 'image/avatar-02.jpg' %}" alt="">
-                            <div class="stack-img">
-                                <img src="{% static 'image/avatar-03.jpg' %}" alt="">
-                                <img src="{% static 'image/avatar-01.jpg' %}" alt="">
-                            </div>
-                        </div>
-                        <p class="roboto-flex">500+ reviews</p>
-                    </div>
-                    <img src="{% static 'image/about-us-img.png' %}" alt="Not Available">
+    <!-- Team Identity Section -->
+    <section class="aboutus-section">
+        <div class="wrapper">
+            <div class="team-identity">
+                <img src="{% static 'image/header_logo1.png' %}" alt="Project Logo" class="project-logo">
+                <h1 class="project-name">The Debuggers Innovation Project</h1>
+            </div>
+
+            <!-- Project Introduction and Demo -->
+            <div class="project-intro">
+                <div class="intro-text">
+                    <h2>Project Introduction</h2>
+                    <p>ByteBites is a revolutionary smart nutrition platform that connects dietary resources, optimizes meal planning, and enhances the overall health experience through AI-powered recommendations.</p>
+                    <p>Our solution tackles the inefficiency and disconnection in personal nutrition planning, creating a more sustainable and engaging health ecosystem. By bringing together data from various food systems, we provide insights that help reduce waste and improve accessibility.</p>
+                    <a href="https://github.com/Shreejana-Giri/Bytebites" class="github-link" target="_blank">
+                        <i class="fab fa-github"></i> GitHub Repository
+                    </a>
                 </div>
-                <div class="about-text-section">
-                    <h1 class="header-one roboto-flex">About Us</h1>
-                    <p class="about-para roboto-flex">We’re a health-focused platform designed to personalize your
-                        wellness journey. By understanding your goals, body type, and dietary preferences, we provide
-                        tailored meal plans, nutritious recipes, and smart suggestions to help you eat better and live
-                        healthier.
-                        Our chatbot assistant is here 24/7 to guide you, recommend meals, and answer all your nutrition
-                        questions. Whether you’re aiming to lose weight, gain muscle, or maintain a balanced lifestyle,
-                        BitesBytes is your digital partner in health — one bite and one byte at a time.
-                        Join us and turn healthy eating into a lifestyle you'll love.</p>
+                <div class="intro-media">
+                    <h2>Project Demo</h2>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Project Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <p>Watch our project demonstration to see ByteBites in action and learn how it transforms nutrition planning experiences.</p>
+                </div>
+            </div>
+
+            <!-- UN Sustainable Development Goals -->
+            <div class="section-header">
+                <h2>UN Sustainable Development Goals</h2>
+            </div>
+            <div class="sdg-goals">
+                <div class="sdg-goal">
+                    <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-03.jpg" alt="SDG 3" class="sdg-icon">
+                    <h3>Good Health and Well-being</h3>
+                    <p>ByteBites promotes healthier eating habits and nutritional awareness, directly contributing to improved health outcomes and overall well-being.</p>
+                </div>
+                <div class="sdg-goal">
+                    <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-12.jpg" alt="SDG 12" class="sdg-icon">
+                    <h3>Responsible Consumption</h3>
+                    <p>Our platform encourages mindful food choices and helps reduce food waste by providing precise portion recommendations and sustainable meal options.</p>
+                </div>
+                <div class="sdg-goal">
+                    <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-10.jpg" alt="SDG 10" class="sdg-icon">
+                    <h3>Reduced Inequalities</h3>
+                    <p>By making nutritional expertise accessible to everyone regardless of background or resources, ByteBites helps reduce inequalities in access to health information.</p>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Design Section -->
+    <section class="aboutus-section">
+        <div class="wrapper">
+            <div class="section-header">
+                <h2>Design Challenge & Solution</h2>
+            </div>
+            <h3>The Challenge</h3>
+            <p>Despite abundant nutritional information available online, many people struggle to create balanced meal plans that meet their specific health needs while accommodating their preferences and lifestyle constraints.</p>
+
+            <h3>Our Solution</h3>
+            <p>ByteBites uses a sophisticated algorithm that analyzes user data including health goals, dietary restrictions, food preferences, and lifestyle factors to generate personalized meal plans. The platform adapts over time based on user feedback and progress tracking.</p>
+
+            <h3>Use Case Scenario</h3>
+            <p>Meet Sarah, a 28-year-old professional with a busy schedule who wants to improve her nutrition while training for a half-marathon. After creating her ByteBites profile and inputting her dietary preferences (vegetarian), allergies (nuts), and fitness goals, the platform generates a customized meal plan that ensures she gets adequate protein, complex carbohydrates, and nutrients to support her training while respecting her dietary restrictions.</p>
+
+            <h3>Technologies Used</h3>
+            <div class="tools-list">
+                <div class="tool-item"><i class="fab fa-python"></i> Python/Django</div>
+                <div class="tool-item"><i class="fas fa-database"></i> Sqlite</div>
+                <div class="tool-item"><i class="fab fa-js"></i> JavaScript</div>
+                
+                <div class="tool-item"><i class="fas fa-robot"></i> Machine Learning</div>
+                <div class="tool-item"><i class="fas fa-mobile-alt"></i> Responsive Design</div>
+            
+                <div class="tool-item"><i class="fas fa-cloud"></i> Cloud Deployment</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prototype Section -->
+    <section class="aboutus-section">
+        <div class="wrapper">
+            <div class="section-header">
+                <h2>Prototype Features</h2>
+            </div>
+            <p>Our current prototype demonstrates the core functionality of ByteBites, focusing on the most critical features that deliver immediate value to users while providing a foundation for future development.</p>
+
+            <p>We prioritized features based on user research that identified personalized meal planning, nutritional analysis, and progress tracking as the most impactful elements for improving dietary habits.</p>
+
+            <div class="prototype-images">
+                <div class="prototype-image">
+                    <img src="{% static 'image/about-us-img.png' %}" alt="User Dashboard">
+                </div>
+                <div class="prototype-image">
+                    <img src="{% static 'image/about-us-img.png' %}" alt="Meal Planning Interface">
+                </div>
+                <div class="prototype-image">
+                    <img src="{% static 'image/about-us-img.png' %}" alt="Nutritional Analysis">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Impact -->
+    <section class="aboutus-section">
+        <div class="wrapper">
+            <div class="section-header">
+                <h2>Market Impact</h2>
+            </div>
+            <p>ByteBites addresses a significant gap in the digital nutrition market by combining personalization, scientific accuracy, and user-friendly design. While many existing solutions focus on calorie counting or generic meal plans, our platform creates truly personalized nutrition guidance based on individual needs and preferences.</p>
+
+            <div class="impact-cards">
+                <div class="impact-card">
+                    <h4>Personalization</h4>
+                    <p>Our AI-driven approach creates meal plans tailored to individual health profiles, preferences, and goals, unlike generic one-size-fits-all solutions.</p>
+                </div>
+                <div class="impact-card">
+                    <h4>Accessibility</h4>
+                    <p>ByteBites makes nutritional expertise accessible to everyone, regardless of their knowledge level or socioeconomic status.</p>
+                </div>
+                <div class="impact-card">
+                    <h4>Adaptability</h4>
+                    <p>Our platform evolves with users, adjusting recommendations based on feedback, progress, and changing goals or preferences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Product -->
+    <section class="aboutus-section">
+        <div class="wrapper">
+            <div class="section-header">
+                <h2>Development Journey</h2>
+            </div>
+            <p>ByteBites was developed using an agile methodology, with regular user testing informing each iteration. We began with extensive research into nutritional science and user needs, followed by prototyping, development, and continuous refinement based on user feedback.</p>
+
+            <p>The development process utilized Django for the backend, React for the frontend, and integrated machine learning models for personalization. We employed user-centered design principles throughout, ensuring the platform remains intuitive and accessible despite its sophisticated functionality.</p>
+
+            <div class="prototype-images">
+                <div class="prototype-image">
+                    <img src="{% static 'image/about-us-img.png' %}" alt="Early Wireframes">
+                </div>
+                <div class="prototype-image">
+                    <img src="{% static 'image/about-us-img.png' %}" alt="Development Process">
+                </div>
+                <div class="prototype-image">
+                    <img src="{% static 'image/about-us-img.png' %}" alt="Final Product">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="aboutus-section">
+        <div class="wrapper">
+            <div class="section-header">
+                <h2>Our Team</h2>
+            </div>
+            <p>ByteBites was created by a multidisciplinary team of students combining expertise in software development, nutritional science, UX design, and data analysis.</p>
+
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="{% static 'image/krrispana.jpg' %}" alt="Team Member" class="team-photo">
+                    <h3 class="team-name">Krrispana karmacharya</h3>
+                    <p class="team-id">ID: 12345678</p>
+                    <p style="font-weight: 600;">Backend Developer</p>
+                    <a href="https://www.linkedin.com/in/krrishpana-karmacharya?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <div class="team-member">
+                    <img src="{% static 'image/nancy.jpg' %}" alt="Team Member" class="team-photo">
+                    <h3 class="team-name">Nancy Mahatha</h3>
+                    <p class="team-id">ID: 34567890</p>
+                    <p style="font-weight: 600;">Chatbot Developer</p>
+                    <a href="https://www.linkedin.com/in/nancymahatha?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <div class="team-member">
+                    <img src="{% static 'image/shreejana.jpg' %}" alt="Team Member" class="team-photo">
+                    <h3 class="team-name">Shreejana Giri</h3>
+                    <p class="team-id">ID: 45678901</p>
+                    <p style="font-weight: 600;">Web Designer and Frontend Developer</p>
+                    <a href="https://www.linkedin.com/in/shreejana-giri?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <div class="team-member">
+                    <img src="{% static 'image/prasidda.jpg' %}" alt="Team Member" class="team-photo">
+                    <h3 class="team-name">Prasidda Khadka</h3>
+                    <p class="team-id">ID: 23456789</p>
+                    <p style="font-weight: 600;">Backend Developer</p>
+                    <a href="https://www.linkedin.com/in/prasidda-khadka?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 {% endblock %}

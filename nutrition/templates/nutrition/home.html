@@ -7,6 +7,10 @@
 
 {% block title %}Home{% endblock %}
 
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/testimonials.css' %}">
+{% endblock %}
+
 {% block content %}
 
 
@@ -38,7 +42,7 @@
 
     <div class="our-features-container">
       <div class="wrapper">
-       
+
 <div class="row mt-4">
     <div class="col-md-4">
         <div class="card h-100">
@@ -93,56 +97,17 @@
     </div>
 
 
-    <h1 class="nunito-sans header-our-features see-what-test">See what others are saying</h1>
-
-
-
-    <div class="girl-thinking">
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
       <div class="wrapper">
+        <div class="testimonials-header">
+          <h2>See What Others Are Saying</h2>
+          <p>Discover how ByteBites has helped people transform their nutrition habits and achieve their health goals</p>
+        </div>
+
         <div class="testimonial-container">
-          <div class="testimonials-upper">
-              <div class="testimonial">
-                <div class="image-with-text">
-                  <img src="{% static 'image/avatar-01.jpg' %}" alt="User" class="avatar" />
-                  <div class="profile-text-container">
-                    <h3>Khushi Regmi</h3>
-                    <p class="date">9 days ago</p>
-                  </div>
-                </div>
-
-                <div class="stars">⭐⭐⭐⭐⭐</div>
-                <div class="content">
-                  <p class="message">BitesByts is exactly what I needed! The chatbot helped me customize a weight loss
-                  plan...</p>
-                </div>
-              </div>
-
-
-
-              <div class="testimonial">
-                <div class="image-with-text">
-                <img src="{% static 'image/avatar-01.jpg' %}" alt="User" class="avatar" />
-                <div class="profile-text-container">
-                <h3>Khushi Regmi</h3>
-                <p class="date">9 days ago</p>
-                </div>
-              </div>
-              <div class="stars">⭐⭐⭐⭐⭐</div>
-                <div class="content">
-                  <p class="message">BitesByts is exactly what I needed! The chatbot helped me customize a weight loss
-                    plan...</p>
-                </div>
-              </div>
-            </div>
-
-
-
-
-
-          <img class="thinking-img" src="{% static 'image/girl-thinking-img.png' %}" alt="Not-Available">
-
-
-          <div class="testimonials-upper">
+          <!-- First Row of Testimonials -->
+          <div class="testimonials-row">
             <div class="testimonial">
               <div class="image-with-text">
                 <img src="{% static 'image/avatar-01.jpg' %}" alt="User" class="avatar" />
@@ -151,49 +116,84 @@
                   <p class="date">9 days ago</p>
                 </div>
               </div>
-              <div class="stars">⭐⭐⭐⭐⭐</div>
+              <div class="stars">★★★★★</div>
               <div class="content">
-                <p class="message">BitesByts is exactly what I needed! The chatbot helped me customize a weight loss
-                  plan...</p>
+                <p class="message">ByteBites is exactly what I needed! The personalized meal plans helped me lose 5kg in just two months while still enjoying delicious food. The AI recommendations are spot on!</p>
               </div>
             </div>
 
-
-            
             <div class="testimonial">
               <div class="image-with-text">
-                <img src="{% static 'image/avatar-01.jpg' %}" alt="User" class="avatar" />
+                <img src="{% static 'image/avatar-02.jpg' %}" alt="User" class="avatar" />
                 <div class="profile-text-container">
-                  <h3>Khushi Regmi</h3>
-                  <p class="date">9 days ago</p>
+                  <h3>Rajesh Sharma</h3>
+                  <p class="date">2 weeks ago</p>
                 </div>
               </div>
-              <div class="stars">⭐⭐⭐⭐⭐</div>
+              <div class="stars">★★★★★</div>
               <div class="content">
-                <p class="message">BitesByts is exactly what I needed! The chatbot helped me customize a weight loss
-                  plan...</p>
+                <p class="message">As a busy professional, I never had time to plan healthy meals. ByteBites changed that completely! Now I have nutritious meals that fit my schedule and fitness goals.</p>
               </div>
             </div>
-
           </div>
 
-         
+          <!-- Central Image -->
+          <div class="testimonial-central-image">
+            <img src="{% static 'image/girl-thinking-img.png' %}" alt="Healthy Lifestyle" />
+          </div>
+
+          <!-- Second Row of Testimonials -->
+          <div class="testimonials-row">
+            <div class="testimonial">
+              <div class="image-with-text">
+                <img src="{% static 'image/avatar-03.jpg' %}" alt="User" class="avatar" />
+                <div class="profile-text-container">
+                  <h3>Priya Thapa</h3>
+                  <p class="date">1 month ago</p>
+                </div>
+              </div>
+              <div class="stars">★★★★★</div>
+              <div class="content">
+                <p class="message">The calorie estimation feature is amazing! I just snap a photo of my meal, and ByteBites tells me the nutritional content. It's made tracking my diet so much easier.</p>
+              </div>
+            </div>
+
+            <div class="testimonial">
+              <div class="image-with-text">
+                <img src="{% static 'image/avatar-01.jpg' %}" alt="User" class="avatar" />
+                <div class="profile-text-container">
+                  <h3>Anish Gurung</h3>
+                  <p class="date">3 weeks ago</p>
+                </div>
+              </div>
+              <div class="stars">★★★★★</div>
+              <div class="content">
+                <p class="message">I've tried many nutrition apps, but ByteBites stands out with its personalized approach. The AI understands my preferences and creates meal plans I actually enjoy following!</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="journey">
+    <!-- Call to Action Section -->
+    <section class="cta-section">
       <div class="wrapper">
-        <div class="text-container-journey">
-          <h3 class="journey-header">Start Your Health Journey Today</h3>
-          <p class="journey-para">Join thousands of Nepalis who are achieving their health goals with ByteBites</p>
-          <div class="button-holder">
-            <button><a href="" class="links">Create Free Account</a></button>
-            <button><a href="" class="links" style="background-color: transparent;">Learn More</a></button>
+        <div class="cta-container">
+          <h2>Start Your Health Journey Today</h2>
+          <p>Join thousands of people who are achieving their health goals with ByteBites</p>
+          <div class="cta-buttons">
+            {% if not user.is_authenticated %}
+            <a href="{% url 'register' %}" class="cta-button primary">Create Free Account</a>
+            <a href="{% url 'how_it_works' %}" class="cta-button secondary">Learn More</a>
+            {% else %}
+            <a href="{% url 'profile' %}" class="cta-button primary">Go to Profile</a>
+            <a href="{% url 'diet_plan' %}" class="cta-button secondary">Get Diet Plan</a>
+            {% endif %}
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
 
 
@@ -224,7 +224,7 @@
     <div class="col-md-10">
         <!-- <div class="background">
             <img src="/static/image/background.jpg">
-            
+
         </div> -->
         <div class="jumbotron text-center py-5 mb-4 bg-light rounded-3">
             <h1 class="display-4">Welcome to ByteBites</h1>

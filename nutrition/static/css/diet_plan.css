@@ -1,0 +1,363 @@
+/* Diet Plan Page Styling */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #87B53D;
+  --primary-dark: #6a9230;
+  --secondary-color: #814F4F;
+  --accent-color: #FF9800;
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --light-color: #f8f9fa;
+  --dark-color: #333333;
+  --text-color: #333333;
+  --text-muted: #6c757d;
+  --border-color: #e0e0e0;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --border-radius: 12px;
+  --border-radius-sm: 8px;
+}
+
+/* Main container styles */
+.diet-plan-container {
+  font-family: 'Inter', sans-serif;
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Card styling */
+.diet-plan-card {
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  margin-bottom: 2rem;
+  border: none;
+}
+
+.diet-plan-header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: none;
+}
+
+.diet-plan-header h3 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.diet-plan-header h3 i {
+  margin-right: 0.75rem;
+  font-size: 1.25rem;
+}
+
+.diet-plan-header .date-generated {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.diet-plan-body {
+  padding: 2rem;
+}
+
+/* Alert styling */
+.diet-plan-alert {
+  border-radius: var(--border-radius-sm);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+}
+
+.diet-plan-alert i {
+  margin-right: 1rem;
+  font-size: 1.5rem;
+  margin-top: 0.25rem;
+}
+
+.diet-plan-alert.warning {
+  background-color: rgba(255, 193, 7, 0.15);
+  border-left: 4px solid var(--warning-color);
+  color: #856404;
+}
+
+.diet-plan-alert.danger {
+  background-color: rgba(220, 53, 69, 0.15);
+  border-left: 4px solid var(--danger-color);
+  color: #721c24;
+}
+
+.diet-plan-alert.success {
+  background-color: rgba(40, 167, 69, 0.15);
+  border-left: 4px solid var(--success-color);
+  color: #155724;
+}
+
+.diet-plan-alert a {
+  color: var(--primary-color);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.diet-plan-alert a:hover {
+  text-decoration: underline;
+}
+
+/* Empty state styling */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.empty-state i {
+  font-size: 4rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.empty-state h4 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.empty-state p {
+  color: var(--text-muted);
+  max-width: 500px;
+  margin: 0 auto 2rem;
+}
+
+/* Button styling */
+.diet-plan-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Nunito', sans-serif;
+}
+
+.diet-plan-btn i {
+  margin-right: 0.5rem;
+}
+
+.diet-plan-btn.primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.diet-plan-btn.primary:hover {
+  background-color: var(--primary-dark);
+  box-shadow: 0 4px 8px rgba(135, 181, 61, 0.3);
+}
+
+.diet-plan-btn.secondary {
+  background-color: #f8f9fa;
+  color: var(--text-color);
+  border: 1px solid #dee2e6;
+}
+
+.diet-plan-btn.secondary:hover {
+  background-color: #e9ecef;
+}
+
+.diet-plan-btn.lg {
+  font-size: 1.1rem;
+  padding: 0.875rem 2rem;
+}
+
+/* Calorie target card */
+.calorie-target {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: white;
+  border-radius: var(--border-radius-sm);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(135, 181, 61, 0.3);
+}
+
+.calorie-target i {
+  font-size: 2.5rem;
+  margin-right: 1.5rem;
+}
+
+.calorie-target-content h5 {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.calorie-target-content p {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* Diet plan content styling */
+.diet-plan-content {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.7;
+  color: var(--text-color);
+}
+
+.diet-plan-content h1,
+.diet-plan-content h2,
+.diet-plan-content h3 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.diet-plan-content h1 {
+  font-size: 1.75rem;
+  color: var(--secondary-color);
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.diet-plan-content h2 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.diet-plan-content h3 {
+  font-size: 1.25rem;
+  color: var(--text-color);
+}
+
+.diet-plan-content p {
+  margin-bottom: 1.25rem;
+}
+
+.diet-plan-content ul,
+.diet-plan-content ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.diet-plan-content li {
+  margin-bottom: 0.5rem;
+}
+
+.diet-plan-content strong {
+  color: var(--secondary-color);
+  font-weight: 600;
+}
+
+/* Action buttons */
+.diet-plan-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+/* Modal styling */
+.diet-plan-modal-header {
+  background-color: var(--primary-color);
+  color: white;
+  border-bottom: none;
+}
+
+.diet-plan-modal-header h5 {
+  font-weight: 600;
+}
+
+.diet-plan-modal-body {
+  padding: 1.5rem;
+}
+
+.diet-plan-modal-footer {
+  border-top: none;
+  padding: 1rem 1.5rem 1.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .diet-plan-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .diet-plan-header .date-generated {
+    margin-top: 0.5rem;
+  }
+  
+  .diet-plan-body {
+    padding: 1.5rem;
+  }
+  
+  .calorie-target {
+    padding: 1.25rem;
+  }
+  
+  .diet-plan-actions {
+    flex-direction: column;
+  }
+  
+  .diet-plan-actions .diet-plan-btn {
+    width: 100%;
+  }
+}
+
+/* Print styles */
+@media print {
+  .diet-plan-container {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .diet-plan-card {
+    box-shadow: none;
+    border: none;
+  }
+  
+  .diet-plan-header {
+    background-color: white !important;
+    color: black !important;
+    padding: 1rem 0;
+  }
+  
+  .diet-plan-body {
+    padding: 0;
+  }
+  
+  .diet-plan-actions,
+  .navbar,
+  .footer,
+  .diet-plan-modal {
+    display: none !important;
+  }
+  
+  .calorie-target {
+    background: white !important;
+    color: black !important;
+    box-shadow: none;
+    border: 1px solid #ddd;
+    padding: 1rem;
+  }
+  
+  .diet-plan-content h1,
+  .diet-plan-content h2,
+  .diet-plan-content h3 {
+    color: black !important;
+  }
+}

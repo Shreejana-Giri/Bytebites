@@ -6,22 +6,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ByteBites - {% block title %}Nutrition App{% endblock %}</title>
-    
-    
+
+
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <link rel="stylesheet" type="text/css" href="/static/css/footer.css"> </head> 
- 
+
+    <link rel="stylesheet" type="text/css" href="/static/css/footer.css"> </head>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-   
+
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-    
+
     {% block extra_head %}{% endblock %}
-    
+
     {% comment %} <style>
         :root {
             --primary-color: #198754;
@@ -30,50 +30,50 @@
             --light-color: #C8E6C9;
             --accent-color: #FF9800;
         }
-        
+
          body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f9f9f9;
             color: #333;
         }
-        
+
         .navbar {
             background-color: var(--primary-color);
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        
+
         .navbar-brand {
             font-weight: bold;
             font-size: 1.5rem;
             color: white !important;
         }
-        
+
         .nav-link {
             color: rgba(255,255,255,0.9) !important;
             font-weight: 500;
         }
-        
+
         .nav-link:hover {
             color: white !important;
         }
-       
+
         .btn-primary {
             background-color: var(--primary-color);
             border-color: var(--dark-color);
         }
-        
+
         .btn-primary:hover {
             background-color: var(--dark-color);
             border-color: var(--dark-color);
         }
-        
+
         .card {
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             margin-bottom: 20px;
             border: none;
         }
-        
+
         .card-header {
             background-color: var(--light-color);
             color: var(--dark-color);
@@ -81,7 +81,7 @@
             border-top-left-radius: 10px !important;
             border-top-right-radius: 10px !important;
         }
-    
+
 
 ul {
     list-style: none;
@@ -247,16 +247,16 @@ h3.section-sub-title strong {
     .column.is-logo {
         order: 4;
     }
-} 
-        
-        
+}
+
+
         .alert {
             border-radius: 8px;
         }
     </style> {% endcomment %}
 </head>
 <body>
-    
+
 
 
 
@@ -283,7 +283,7 @@ h3.section-sub-title strong {
 
     <!-- Navbar -->
         <nav class="navbar">
-                  
+
             <ul class="links-container">
                     <li class="links">
                         <a class="anchor" href="{% url 'home' %}">Home</a>
@@ -346,7 +346,10 @@ h3.section-sub-title strong {
                 <ul class="links-container">
                     {% if user.is_authenticated %}
                     <li class="links">
-                        <a class="anchor" href="{% url 'logout' %}">Logout</a>
+                        <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="anchor" >Logout</button>
+                        </form>
                     </li>
                     {% else %}
                     <li class="links">
@@ -357,10 +360,10 @@ h3.section-sub-title strong {
                     </li>
                     {% endif %}
                 </ul>
-           
+
         </nav>
 
-  
+
 </div>
 </header>
 
@@ -411,10 +414,10 @@ h3.section-sub-title strong {
             {% endfor %}
         {% endif %}
     </div>
-        
+
         <!-- Page Content -->
         {% block content %}
-        
+
         {% endblock %}
 </main>
     <!-- Footer -->
@@ -494,10 +497,10 @@ h3.section-sub-title strong {
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- Custom JS -->
     <script src="/static/nutrition/js/scripts.js"></script>
-    
+
     {% block scripts %}{% endblock %}
 </body>
 </html>

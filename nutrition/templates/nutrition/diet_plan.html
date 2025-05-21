@@ -1,81 +1,81 @@
 {% extends "nutrition/base.html" %}
+{% load static %}
+{% load markdown_extras %}
 
 {% block title %}Diet Plan{% endblock %}
 
-{% load markdown_extras %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/diet_plan.css' %}">
+{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-12">
-        <div class="card mb-4">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h3 class="mb-0">
-                    <i class="fas fa-utensils me-2"></i>Your Personalized Diet Plan
-                </h3>
-                {% if diet_plan %}
-                <small class="text-muted">
-                    Generated on: {{ diet_plan.date_generated|date:"F j, Y" }}
-                </small>
-                {% endif %}
+<div class="diet-plan-container">
+    <div class="diet-plan-card">
+        <div class="diet-plan-header">
+            <h3>
+                <i class="fas fa-utensils"></i>Your Personalized Diet Plan
+            </h3>
+            {% if diet_plan %}
+            <div class="date-generated">
+                Generated on: {{ diet_plan.date_generated|date:"F j, Y" }}
             </div>
-            <div class="card-body">
-                {% if not profile.height or not profile.weight or not profile.age or not profile.gender or not profile.lifestyle or not profile.goal %}
-                <div class="alert alert-warning">
-                    <i class="fas fa-exclamation-triangle me-2"></i>
-                    You need to complete your profile before we can generate a diet plan. 
-                    Please <a href="{% url 'profile' %}">update your profile</a>.
+            {% endif %}
+        </div>
+        <div class="diet-plan-body">
+            {% if not profile.height or not profile.weight or not profile.age or not profile.gender or not profile.lifestyle or not profile.goal %}
+            <div class="diet-plan-alert warning">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>
+                    <p>You need to complete your profile before we can generate a diet plan.</p>
+                    <p class="mb-0">Please <a href="{% url 'profile' %}">update your profile</a> with your health information.</p>
                 </div>
-                {% elif not diet_plan %}
-                <div class="text-center py-5">
-                    <i class="fas fa-blender fa-5x text-muted mb-3"></i>
-                    <h4>Let's create your personalized diet plan!</h4>
-                    <p class="text-muted mb-4">Based on your profile, we'll design a nutrition plan to help you reach your goals.</p>
-                    <form method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-primary btn-lg">
-                            <i class="fas fa-magic me-2"></i>Generate Diet Plan
-                        </button>
-                    </form>
-                </div>
-                {% elif error %}
-                <div class="alert alert-danger">
-                    <i class="fas fa-exclamation-circle me-2"></i>
-                    {{ error }}
-                </div>
-                <div class="text-center mt-3">
-                    <a href="{% url 'profile' %}" class="btn btn-outline-secondary">Return to Profile</a>
-                </div>
-                {% else %}
-                <div class="mb-4">
-                    <div class="alert alert-success">
-                        <div class="d-flex">
-                            <div class="me-3">
-                                <i class="fas fa-check-circle fa-2x"></i>
-                            </div>
-                            <div>
-                                <h5 class="alert-heading">Your Daily Target. Let's GOOO!</h5>
-                                <p class="mb-0">{{ diet_plan.daily_calories|floatformat:0 }} calories per day</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="diet-plan-content">
-                    {{ diet_plan.diet_plan| convert_markdown | safe }}
-                </div>
-                
-                <hr>
-                
-                <div class="text-center mt-4">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#regeneratePlanModal">
-                        <i class="fas fa-sync-alt me-2"></i>Regenerate Plan
-                    </button>
-                    <button class="btn btn-outline-secondary ms-2" onclick="window.print()">
-                        <i class="fas fa-print me-2"></i>Print Plan
-                    </button>
-                </div>
-                {% endif %}
             </div>
+            {% elif not diet_plan %}
+            <div class="empty-state">
+                <i class="fas fa-blender"></i>
+                <h4>Let's create your personalized diet plan!</h4>
+                <p>Based on your profile, we'll design a nutrition plan to help you reach your goals. Our AI will analyze your health data and preferences to create a plan that works for you.</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="diet-plan-btn primary lg">
+                        <i class="fas fa-magic"></i>Generate Diet Plan
+                    </button>
+                </form>
+            </div>
+            {% elif error %}
+            <div class="diet-plan-alert danger">
+                <i class="fas fa-exclamation-circle"></i>
+                <div>
+                    <p>{{ error }}</p>
+                </div>
+            </div>
+            <div class="empty-state" style="padding-top: 1rem;">
+                <a href="{% url 'profile' %}" class="diet-plan-btn secondary">
+                    <i class="fas fa-user"></i>Return to Profile
+                </a>
+            </div>
+            {% else %}
+            <div class="calorie-target">
+                <i class="fas fa-check-circle"></i>
+                <div class="calorie-target-content">
+                    <h5>Your Daily Target. Let's GOOO!</h5>
+                    <p>{{ diet_plan.daily_calories|floatformat:0 }} calories per day</p>
+                </div>
+            </div>
+
+            <div class="diet-plan-content">
+                {{ diet_plan.diet_plan| convert_markdown | safe }}
+            </div>
+
+            <div class="diet-plan-actions">
+                <button type="button" class="diet-plan-btn primary" data-bs-toggle="modal" data-bs-target="#regeneratePlanModal">
+                    <i class="fas fa-sync-alt"></i>Regenerate Plan
+                </button>
+                <button class="diet-plan-btn secondary" onclick="window.print()">
+                    <i class="fas fa-print"></i>Print Plan
+                </button>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>
@@ -84,72 +84,21 @@
 <div class="modal fade" id="regeneratePlanModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header diet-plan-modal-header">
                 <h5 class="modal-title">Regenerate Diet Plan</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body diet-plan-modal-body">
                 <p>Are you sure you want to generate a new diet plan? This will replace your current plan.</p>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <div class="modal-footer diet-plan-modal-footer">
+                <button type="button" class="diet-plan-btn secondary" data-bs-dismiss="modal">Cancel</button>
                 <form method="post">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-primary">Generate New Plan</button>
+                    <button type="submit" class="diet-plan-btn primary">Generate New Plan</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
-<style>
-    .diet-plan-content, .diet-alternatives {
-        font-size: 1.05rem;
-        line-height: 1.6;
-    }
-    
-    .diet-plan-content h1, .diet-plan-content h2, .diet-plan-content h3,
-    .diet-alternatives h1, .diet-alternatives h2, .diet-alternatives h3 {
-        margin-top: 1.5rem;
-        margin-bottom: 0.75rem;
-        font-weight: 600;
-    }
-    
-    .diet-plan-content h1, .diet-alternatives h1 {
-        font-size: 1.5rem;
-        color: var(--dark-color);
-    }
-    
-    .diet-plan-content h2, .diet-alternatives h2 {
-        font-size: 1.3rem;
-        color: var(--primary-color);
-    }
-    
-    .diet-plan-content h3, .diet-alternatives h3 {
-        font-size: 1.15rem;
-    }
-    
-    .diet-plan-content ul, .diet-alternatives ul {
-        padding-left: 1.5rem;
-    }
-    
-    @media print {
-        .navbar, .footer, .btn, .card-header, #regeneratePlanModal {
-            display: none !important;
-        }
-        
-        .card {
-            border: none !important;
-            box-shadow: none !important;
-        }
-        
-        .card-body {
-            padding: 0 !important;
-        }
-        
-        body {
-            font-size: 12pt;
-        }
-    }
-</style>
 {% endblock %}
